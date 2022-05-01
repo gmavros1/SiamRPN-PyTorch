@@ -20,7 +20,8 @@ args = parser.parse_args()
 if __name__ == '__main__':
 
     """Load the parameters from json file"""
-    json_path = os.path.join('experiments/{}'.format(args.experiment_name), 'parameters.json')
+    #json_path = os.path.join('experiments/{}'.format(args.experiment_name), 'parameters.json')
+    json_path = os.path.join(format(args.experiment_name), 'parameters.json')
     assert os.path.isfile(json_path), ("No json configuration file found at {}".format(json_path))
     with open(json_path) as data_file:
         params = json.load(data_file)
@@ -54,7 +55,7 @@ if __name__ == '__main__':
                     report_dir='experiments/{}/reports'.format(args.experiment_name))
 
     '''
-    experiments = ExperimentOTB('/home/arbi/desktop/data', version=2015,
+    experiments = ExperimentOTB('./videoTest/', version=2015,
                     result_dir='experiments/{}/OTB2015resultsGOT-10k_42'.format(args.experiment_name),
                     report_dir='experiments/{}/OTB2015reportsGOT-10k_42'.format(args.experiment_name))
 

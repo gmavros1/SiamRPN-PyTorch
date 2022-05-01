@@ -74,7 +74,7 @@ class SiamRPN(nn.Module):
         return out_reg, out_cls
 
 class TrackerSiamRPNBIG(Tracker):
-    def __init__(self, params, model_path = None, **kargs):
+    def __init__(self, model_path):
         super(TrackerSiamRPNBIG, self).__init__(name='SiamRPN', is_deterministic=True)
 
         self.model = SiameseAlexNet()

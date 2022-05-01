@@ -4,7 +4,11 @@ import numpy as np
 
 tracker = TrackerSiamRPNBIG("/home/gmavros/Desktop/sxolh_last/υπολογιστική όραση/tracker/siamRPN weights/SiamRPNOTB.pth")
 
-video = cv.VideoCapture("/home/gmavros/Desktop/sxolh_last/υπολογιστική όραση/tracker/videoTest/Coke.mp4")
+#video = cv.VideoCapture("/home/gmavros/Desktop/sxolh_last/υπολογιστική όραση/tracker/videoTest/Coke.mp4") # coca cola
+video = cv.VideoCapture("/home/gmavros/Desktop/sxolh_last/υπολογιστική όραση/tracker/videoTest/2022-05-01-181016.webm") # backround drifting
+
+fourcc = cv.VideoWriter_fourcc(*'XVID')
+out = cv.VideoWriter('output.avi', fourcc, 20.0, (640,  480)) # save
 
 if not video.isOpened():
     print("Cannot open camera")
@@ -12,7 +16,8 @@ if not video.isOpened():
 
 # Init tracker
 _, frame = video.read()
-tracker.init(frame, np.array([298, 160, 48, 80]))
+#tracker.init(frame, np.array([298, 160, 48, 80])) # coca cola
+tracker.init(frame, np.array([880, 450, 180, 100])) # backround drifting
 
 while True:
     # Capture frame-by-frame
@@ -35,8 +40,10 @@ while True:
 
     # Display the resulting frame
     cv.imshow('frame', frame)
+    out.write(frame) # save
     if cv.waitKey(1) == ord('q'):
         break
 # When everything done, release the capture
 video.release()
+out.release()
 cv.destroyAllWindows()
